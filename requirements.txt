@@ -1,0 +1,15 @@
+fiona
+gdal
+geopandas
+jupyterlab
+matplotlib
+numpy
+pandas
+rasterio
+requests
+shapely
+tqdm
+rtree
+backoff
+planet
+earthengine-api
