@@ -15,7 +15,7 @@ setup(
     name='seplanet',
     packages=find_packages(),
     include_package_data=True,
-    version='0.3',
+    version='0.4',
     description='High-level functionality for the inventory, download '
                 'and pre-processing of Planet data',
     install_requires=parse_requirements('requirements.txt'),

@@ -7,6 +7,13 @@ from shapely.errors import WKTReadingError
 from fiona import collection
 from fiona.crs import from_epsg
 
+# make crs work
+import os 
+if 'GDAL_DATA' in list(os.environ.keys()): del os.environ['GDAL_DATA']
+if 'PROJ_LIB' in list(os.environ.keys()): del os.environ['PROJ_LIB']
+    
+import rasterio as rio
+from rasterio.crs import CRS
 import geopandas as gpd
 
 
@@ -146,4 +153,26 @@ def aoi_to_gdf(aoi):
 def aoi_to_geom_dict(aoi_gdf):
     
     return aoi_gdf.__geo_interface__['features'][0]['geometry']
+
+
+def calculate_ndvi(infile, outfile):
     
+    date = infile.stem[:7] + '-01'
+    with rio.open(infile) as src:
+        
+        # read bands
+        nir = src.read(4)
+        red = src.read(3)
+        
+        # copy metadata
+        outmeta = src.meta
+        outmeta.update(count=1)
+        outmeta.update(dtype='float32')
+        outmeta.update(compress='lzw')
+        outmeta.update(crs=CRS.from_epsg(3857))
+        
+        ndvi = (nir-red)/(nir+red).astype('float32')
+        
+        with rio.open(outfile, 'w', **outmeta) as dst:
+            dst.write(ndvi, 1)
+            dst.set_band_description(1, date)
