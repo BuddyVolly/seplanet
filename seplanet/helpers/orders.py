@@ -36,7 +36,7 @@ def build_order(aoi, inventory_gdf, title, tools, out_projection, anchor_image_i
         'PSScene4Band': "analytic_udm2",
         'PSOrthoTile': "analytic_5b_udm2,analytic_5b,analytic_udm2,analytic",
         'REOrthoTile': "analytic",
-        'SkySatScene': "ortho_analytic_udm2"
+        'SkySatScene': "analytic_udm2",
     }
 
     # This will create a tuple with the item_type and with the corresponding associated item_ids'

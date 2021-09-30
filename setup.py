@@ -25,7 +25,5 @@ setup(
     license='MIT License',
     keywords=['Planet', 'Remote Sensing', 'Earth Observation',
               'Sepal'],
-    zip_safe=False #,
-    #setup_requires=['pytest-runner'],
-    #tests_require=['pytest']
+    zip_safe=False
 )

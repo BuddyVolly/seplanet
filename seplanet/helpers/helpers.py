@@ -91,6 +91,14 @@ def wkt_to_gdf(wkt):
 
 def aoi_to_gdf(aoi):
     
+    # geopandas readable file
+    try: 
+        gdf = gpd.read_file(aoi)
+        print(len(gdf))
+        
+    except:
+        pass
+    
     # feature collection
     try:
         gdf = gpd.GeoDataFrame.from_features(aoi)
@@ -99,14 +107,6 @@ def aoi_to_gdf(aoi):
     except:
         pass
     
-    # geopandas readable file
-    try: 
-        gdf = gpd.read_file(aoi)
-        print(len(gdf))
-        
-    except:
-        pass
-
     # plain geometry dict
     try:
         fc = {'type': 'FeatureCollection',
